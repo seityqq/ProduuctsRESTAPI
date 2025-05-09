@@ -3,8 +3,9 @@ package main
 import (
 	"CRUDitems/api"
 	"CRUDitems/internal/migrate"
-
+	_ "database/sql"
 	"github.com/gorilla/mux"
+	_ "github.com/lib/pq"
 	"log"
 	"net/http"
 	"os"
@@ -32,7 +33,7 @@ func main() {
 	r.HandleFunc("/products", api.GetAllProducts).Methods("GET")
 	r.HandleFunc("/products", api.CreateProduct).Methods("POST")
 	r.HandleFunc("/products/{id}", api.UpdateProduct).Methods("PUT")
-	r.HandleFunc("/products/{id}/rollback", api.RollbackProduct).Methods("POST")
+	r.HandleFunc("/products/{id}/{rollbackId}/rollback", api.RollbackProduct).Methods("POST")
 
 	log.Println("Starting server on :8080")
 	err = http.ListenAndServe(":8080", r)

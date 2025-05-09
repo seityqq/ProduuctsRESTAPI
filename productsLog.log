@@ -1,0 +1,23 @@
+2025/05/05 19:30:38 Error creating migrator: failed to open database: database driver: unknown driver postgres (forgotten import?)
+2025/05/05 19:32:23 Error creating migrator: failed to open database: database driver: unknown driver postgres (forgotten import?)
+2025/05/05 19:34:09 Current migration version: 0
+2025/05/05 19:34:09 Migrations have been applied. New version: 20250503162628
+2025/05/05 19:34:09 Starting server on :8080
+2025/05/05 20:01:19 Current migration version: 20250503162628
+2025/05/05 20:01:19 Migrations have been applied. New version: 20250503162628
+2025/05/05 20:01:19 Starting server on :8080
+2025/05/05 20:13:20 Current migration version: 20250503162628
+2025/05/05 20:13:20 Migrations have been applied. New version: 20250503162628
+2025/05/05 20:13:20 Starting server on :8080
+2025/05/05 20:16:17 Current migration version: 20250503162628
+2025/05/05 20:16:17 Migrations have been applied. New version: 20250503162628
+2025/05/05 20:16:17 Starting server on :8080
+2025/05/05 20:17:05 Current migration version: 20250503162628
+2025/05/05 20:17:05 Migrations have been applied. New version: 20250503162628
+2025/05/05 20:17:05 Starting server on :8080
+2025/05/05 20:31:02 Current migration version: 0
+2025/05/05 20:31:02 Migrations have been applied. New version: 20250503162628
+2025/05/05 20:31:02 Starting server on :8080
+2025/05/06 14:35:33 Current migration version: 0
+2025/05/06 14:35:33 Migrations have been applied. New version: 20250503162628
+2025/05/06 14:35:33 Starting server on :8080

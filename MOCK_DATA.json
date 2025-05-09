@@ -1,0 +1,30 @@
+[
+  {
+    "id": 4,
+    "label": "Motorola RAZR2 V9",
+    "description": "Luxurious satin slip dress for an elegant evening look.",
+    "price": 8080,
+    "created_at": "2025-05-05T20:21:44.371082Z"
+  },
+  {
+    "id": 1,
+    "label": "Oppo A93 5G",
+    "description": "Versatile canned black beans, ready to add to any dish.",
+    "price": 25000,
+    "created_at": "2025-05-05T20:06:45.947388Z"
+  },
+  {
+    "id": 2,
+    "label": "LG L80 Dual",
+    "description": "Rich chocolate cups filled with almond butter, a delicious treat.",
+    "price": 34000,
+    "created_at": "2025-05-05T20:13:36.169592Z"
+  },
+  {
+    "id": 3,
+    "label": "Motorola Moto G Fast",
+    "description": "Effective brush for removing loose hair from pets.",
+    "price": 16500,
+    "created_at": "2025-05-05T20:17:10.469805Z"
+  }
+]

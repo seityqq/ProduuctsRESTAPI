@@ -9,6 +9,7 @@ import (
 	"log"
 	"net/http"
 	"strconv"
+	"time"
 )
 
 const (
@@ -16,10 +17,11 @@ const (
 )
 
 type Product struct {
-	id          int     `json:id`
-	label       string  `json:label`
-	description string  `json:description`
-	price       float64 `json:price`
+	ID          int       `json:"id"`
+	Label       string    `json:"label"`
+	Description string    `json:"description"`
+	Price       int       `json:"price"`
+	CreatedAt   time.Time `json:"created_at"`
 }
 
 var DB *sql.DB
@@ -28,7 +30,7 @@ func InitDB() (*sql.DB, error) {
 	psqlInfo := fmt.Sprintf("host=%s port=%d user=%s password=%s dbname=%s sslmode=disable",
 		"localhost", 5432, "postgres", "postgres", "postgres")
 
-	db, err := sql.Open("postgres", psqlInfo)
+	DB, err := sql.Open("postgres", psqlInfo)
 	if err != nil {
 		log.Fatal("Database connection failed: %s", err)
 	}
@@ -37,17 +39,11 @@ func InitDB() (*sql.DB, error) {
 		log.Fatal("Database ping failed: %s", err)
 	}
 
-	fmt.Println("Successfully connected to database")
-	return db, nil
+	log.Println("Successfully connected to database")
+	return DB, nil
 }
 
 func GetAllProducts(w http.ResponseWriter, r *http.Request) {
-	params := mux.Vars(r)
-	_, err := strconv.Atoi(params["id"])
-	if err != nil {
-		http.Error(w, "Invalid ID", http.StatusBadRequest)
-		return
-	}
 
 	rows, err := DB.Query("SELECT * FROM products")
 	if err != nil {
@@ -59,7 +55,7 @@ func GetAllProducts(w http.ResponseWriter, r *http.Request) {
 	var products []Product
 	for rows.Next() {
 		var product Product
-		err := rows.Scan(&product.id, &product.label, &product.description)
+		err := rows.Scan(&product.ID, &product.Label, &product.Description, &product.Price, &product.CreatedAt)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
@@ -78,7 +74,7 @@ func CreateProduct(w http.ResponseWriter, r *http.Request) {
 	}
 
 	sqlStatement := `INSERT INTO products(label, description, price) VALUES ($1, $2, $3)`
-	_, err = DB.Exec(sqlStatement, product.label, product.description, product.price)
+	_, err = DB.Exec(sqlStatement, product.Label, product.Description, product.Price)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
@@ -89,7 +85,7 @@ func CreateProduct(w http.ResponseWriter, r *http.Request) {
 
 func UpdateProduct(w http.ResponseWriter, r *http.Request) {
 	params := mux.Vars(r)
-	_, err := strconv.Atoi(params["id"])
+	prodID, err := strconv.Atoi(params["id"])
 	if err != nil {
 		http.Error(w, "Invalid ID", http.StatusBadRequest)
 		return
@@ -102,8 +98,8 @@ func UpdateProduct(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	sqlStatement := `UPDATE products SET label = $1, description = &2, price = $3`
-	_, err = DB.Exec(sqlStatement, product.label, product.description, product.price)
+	sqlStatement := `UPDATE products SET label = $1, description = $2, price = $3 WHERE id = $4`
+	_, err = DB.Exec(sqlStatement, product.Label, product.Description, product.Price, prodID)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
@@ -113,13 +109,26 @@ func UpdateProduct(w http.ResponseWriter, r *http.Request) {
 }
 
 func RollbackProduct(w http.ResponseWriter, r *http.Request) {
+	params := mux.Vars(r)
+	_, err := strconv.Atoi(params["id"])
+	if err != nil {
+		http.Error(w, "Invalid ID", http.StatusBadRequest)
+		return
+	}
+
+	rollbackID, err := strconv.Atoi(params["rollbackId"])
+	if err != nil {
+		http.Error(w, "Invalid rollback ID", http.StatusBadRequest)
+		return
+	}
+
 	m, err := migrate.New("file://migrations", dsn)
 	if err != nil {
 		http.Error(w, "Error creating migrator: %v", http.StatusInternalServerError)
 		return
 	}
 
-	if err := m.Steps(-1); err != nil {
+	if err := m.Migrate(uint(rollbackID)); err != nil {
 		if err == migrate.ErrNoChange {
 			w.Write([]byte("Nothing to rollback"))
 			return
