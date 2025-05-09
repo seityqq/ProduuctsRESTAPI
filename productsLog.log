@@ -21,3 +21,9 @@
 2025/05/06 14:35:33 Current migration version: 0
 2025/05/06 14:35:33 Migrations have been applied. New version: 20250503162628
 2025/05/06 14:35:33 Starting server on :8080
+2025/05/09 13:32:56 Current migration version: 0
+2025/05/09 13:32:56 Migrations have been applied. New version: 20250503162628
+2025/05/09 13:32:56 Starting server on :8080
+2025/05/09 13:39:30 Current migration version: 20250503162628
+2025/05/09 13:39:30 Migrations have been applied. New version: 20250503162628
+2025/05/09 13:39:30 Starting server on :8080

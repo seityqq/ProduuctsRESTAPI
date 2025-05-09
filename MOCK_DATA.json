@@ -14,17 +14,38 @@
     "created_at": "2025-05-05T20:06:45.947388Z"
   },
   {
-    "id": 2,
-    "label": "LG L80 Dual",
-    "description": "Rich chocolate cups filled with almond butter, a delicious treat.",
-    "price": 34000,
-    "created_at": "2025-05-05T20:13:36.169592Z"
-  },
-  {
     "id": 3,
     "label": "Motorola Moto G Fast",
     "description": "Effective brush for removing loose hair from pets.",
     "price": 16500,
     "created_at": "2025-05-05T20:17:10.469805Z"
+  },
+  {
+    "id": 5,
+    "label": "T-Mobile G2x",
+    "description": "Delicious noodles tossed in a sesamegarlic sauce.",
+    "price": 23874,
+    "created_at": "2025-05-06T14:37:01.060857Z"
+  },
+  {
+    "id": 2,
+    "label": "Huawei MediaPad T3 7.0",
+    "description": "Convenient and low-carb alternative to traditional rice.",
+    "price": 12309477,
+    "created_at": "2025-05-05T20:13:36.169592Z"
+  },
+  {
+    "id": 7,
+    "label": "Allview Viva H8 LTE",
+    "description": "Secure digital wireless security camera system.",
+    "price": 299,
+    "created_at": "2025-05-09T13:43:47.930037Z"
+  },
+  {
+    "id": 6,
+    "label": "Celkon C104",
+    "description": "Flavored aioli made with roasted garlic",
+    "price": 555,
+    "created_at": "2025-05-09T13:34:02.830424Z"
   }
 ]
