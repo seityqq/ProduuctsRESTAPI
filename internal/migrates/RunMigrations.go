@@ -1,9 +1,9 @@
-package migrate
+package migrates
 
 import (
 	_ "database/sql"
 	_ "fmt"
-	"github.com/golang-migrate/migrate/v4"
+	mlib "github.com/golang-migrate/migrate/v4"
 	_ "github.com/golang-migrate/migrate/v4/database/postgres"
 	_ "github.com/golang-migrate/migrate/v4/source/file"
 	_ "github.com/lib/pq"
@@ -12,7 +12,7 @@ import (
 )
 
 func RunMigrations(dsn string) {
-	m, err := migrate.New(
+	m, err := mlib.New(
 		"file://migrations", dsn)
 	if err != nil {
 		log.Fatalf("Error creating migrator: %v", err)
@@ -25,7 +25,7 @@ func RunMigrations(dsn string) {
 		log.Printf("Current migration version: %d", version)
 	}
 
-	if err := m.Up(); err != nil && err != migrate.ErrNoChange {
+	if err := m.Up(); err != nil && err != mlib.ErrNoChange {
 		log.Fatalf("Error applying migration\n\n: %v", err)
 	}
 
